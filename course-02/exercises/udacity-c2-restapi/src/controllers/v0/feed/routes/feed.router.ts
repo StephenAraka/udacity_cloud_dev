@@ -35,7 +35,32 @@ router.patch('/:id',
     requireAuth,
     async (req: Request, res: Response) => {
         //TODO try it yourself
-        res.status(500).send("not implemented")
+        const { id } = req.params;
+        const item = await FeedItem.findByPk(id);
+
+        if (!item) {
+            return res.status(404).send({ message: 'Item Not Found' });
+        }
+
+
+        const caption = req.body.caption;
+        const fileName = req.body.url;
+
+        if (!caption) {
+            return res.status(400).send({ message: 'Caption is required or malformed' });
+        }
+
+        // check Filename is valid
+        if (!fileName) {
+            return res.status(400).send({ message: 'File url is required' });
+        }
+
+        item.update({
+            caption,
+            url: fileName
+        })
+
+        res.status(204).send({ message: "Resource Updated" })
     });
 
 
