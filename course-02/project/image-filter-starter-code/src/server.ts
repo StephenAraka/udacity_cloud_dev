@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import fs from "fs";
 
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
+import { nextTick } from 'process';
 
 (async () => {
 
@@ -40,14 +41,13 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
     const filePath = await filterImageFromURL(image_url as string);
 
-    return res.status(200).download(filePath, image_url as string, (err: Error) => {
+    res.status(200).sendFile(filePath, (err: Error) => {
       if (err) {
-        console.log(err);
+        console.log("Could not send file" + err);
       }
-
-      fs.unlinkSync(filePath);
     });
 
+    return res.on('finish', () => deleteLocalFiles([filePath]));
   });
 
   /**************************************************************************** */
