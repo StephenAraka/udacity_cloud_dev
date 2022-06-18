@@ -44,15 +44,12 @@ import { nextTick } from 'process';
     res.status(200).sendFile(filePath, (err: Error) => {
       if (err) {
         console.log("Could not send file" + err);
+        return res.status(422).send({ message: "Upload failed" + err })
       }
     });
 
     return res.on('finish', () => deleteLocalFiles([filePath]));
   });
-
-  /**************************************************************************** */
-
-  //! END @TODO1
   
   // Root Endpoint
   // Displays a simple message to the user
