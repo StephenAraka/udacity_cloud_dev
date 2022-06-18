@@ -5,6 +5,8 @@ import * as AWS from '../../../../aws';
 
 const router: Router = Router();
 
+const IMAGE_FILTER_API = 'http://udagram-image-filter-project-dev.us-east-1.elasticbeanstalk.com';
+
 // Get all feed items
 router.get('/', async (req: Request, res: Response) => {
     const items = await FeedItem.findAndCountAll({ order: [['id', 'DESC']] });
@@ -94,7 +96,7 @@ router.post('/',
 
         const item = await new FeedItem({
             caption: caption,
-            url: fileName
+            url: `${IMAGE_FILTER_API}/filteredimage?image_url=${fileName}`
         });
 
         const saved_item = await item.save();
