@@ -31,11 +31,32 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
 Follow the process described in the course to `eb init` a new application and `eb create` a new environment to deploy your image-filter service! Don't forget you can use `eb deploy` to push changes.
 
+##### IMPLEMENTATION
+System has been successfully deployed to Elastic Beanstalk ([link to application here](http://udagram-image-filter-project-dev.us-east-1.elasticbeanstalk.com/)) and as seen in the screenshots below:
+
+
+1. _Deploying the server using Elastic Beanstalk CLI_
+![EB CLI](deployment_screenshots/5_eb_create.png)
+
+3. _Successfully deployed server in AWS Console >> EB Dashboard_
+![EB Deployment](deployment_screenshots/1_eb_deployment.png)
+
+3. _Running Server - Root Route_
+![EB Running Api](deployment_screenshots/2_eb_api_running.png)
+
+3. _Example Query Request showing filtered image_
+![Api Query Example](deployment_screenshots/3_eb_filtered_image.png)
+
 ## Stand Out (Optional)
 
 ### Refactor the course RESTapi
 
 If you're feeling up to it, refactor the course RESTapi to make a request to your newly provisioned image server.
+
+##### IMPLEMENTATAION
+The rest api was modified to use the newly deployed filtered image api as shown in the screenshot below:
+![Rest Api Code](deployment_screenshots/4_refactored_restapi.png)
+
 
 ### Authentication
 
